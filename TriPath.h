@@ -7,9 +7,6 @@
     The class TriPath is a subclass of TriModel. The purpose of the class is to encode
     all possible paths in a trinomial tree, their associated prices, and their associated
     probabilities.
-
-    You should implement the methods for the path, prices and trees yourself, including
-    any functions you deem necessary.
 */
 
 class TriPath : public TriModel
@@ -17,15 +14,29 @@ class TriPath : public TriModel
     private:
         double T;
         int N;
+        double S0;
+        double sigma;
+        double r;
     public:
-        /*
-        TRIPATH CONSTRUTOR: Only partially implemented.
-            You should finish this off!
-        */
+        //Constructor
+        TriPath(double S0_, double sigma_, double r_, double T_, int N_) : TriModel(S0,sigma,r) {}
 
-        TriPath(double S0_, double sigma_, double r_, double T_, int N_) {};
+        //Return a path given an index
+        void PathByNumber(int x, int *path);
 
+        //Calculate prices along a given path
+        void PricesByPath(int *path, double *prices);
 
+        //Calculate probability path is selected
+        double ProbabilityByPath(int *path);
+
+        //For a level n of the tree, this returns the node of a path
+        int getNode(int x, int n);
+
+        //Fo
+        int getPos(int x, int node);
+
+        void AllPaths();
 };
 
 

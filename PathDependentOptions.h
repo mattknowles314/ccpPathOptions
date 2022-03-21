@@ -7,9 +7,6 @@
     The class PathDependentOptions is a pure virtual class which prices path-dependent
     options. Note that the abstract function Payoff has been redefined from the
     BinModel class to take an array of prices by reference.
-
-    You should implement the member function PriceByExpectation in a .cpp file and
-    implement each exotic call option by using subclasses.
 */
 
 
