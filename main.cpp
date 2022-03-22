@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <stdlib.h>
+
 #include "ReadCSVFile.h"
 #include "TriModel.h"
 #include "TriPath.h"
@@ -22,11 +23,18 @@ void DisplayDoubleVector(vecType V){
 }
 
 int main(){
-   cout << "running" << endl;
-   ReadCSV obj("Data/SampleData.csv");
-   vector<vector<string>> optsData;
-   obj.CSV2VEC();
+   cout << "=== PATH DEPENDENT OPTIONS PRICING ===" << endl;
+   
+   //Create an instance of the ReadCSV class pointing to the CSV file containing stock data
+   ReadCSV csv("Data/StockDataMar2022.csv");
+   
+   //Empty double vector for storing stock data
+   vector<vector<string>> stockData;
 
-   DisplayDoubleVector(optsData);
+   //Populate the double vector with the data from the CSV file
+   stockData = csv.CSV2VEC();
+
+   //Display stock data
+   DisplayDoubleVector(stockData);
 
 }

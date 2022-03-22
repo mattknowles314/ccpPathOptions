@@ -3,6 +3,9 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <vector>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -21,6 +24,7 @@ vector<vector<string>> ReadCSV::CSV2VEC()
             //Create empty stringstream object to store the entire line of the CSV as a string
             stringstream str(line);
 
+            //Loop through each datapoint in the CSV
             while (getline(str,datapoint,','))
             {
                 //Add datapoint to the row 
@@ -30,7 +34,7 @@ vector<vector<string>> ReadCSV::CSV2VEC()
             data.push_back(row);
         }
     } else{
-        cout << "ERROR - No Such File";
+        cout << "ERROR - No Such File" << endl;
     }
     return data;
 }

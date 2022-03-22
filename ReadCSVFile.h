@@ -3,14 +3,15 @@ Class for reading a CSV file to obtain necessary data.
 
 Psas a file location to the class. 
 */
-#ifndef ReadCSVFile_H
-#define ReadCSVFile_H
+#ifndef READCSVFILE_H
+#define READCSVFILE_H
  
-#include <iostream>
-#include <fstream>
 #include <string>
-#include <vector>
+#include <fstream>
 #include <sstream>
+#include <vector>
+#include <iostream>
+#include <string>
  
 using namespace std;
 
@@ -24,4 +25,4 @@ class ReadCSV
         vector<vector<string>> CSV2VEC();
 };
 
-#endif
+#endif // READCSVFILE_H
