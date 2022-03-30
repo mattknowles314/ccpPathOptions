@@ -12,6 +12,7 @@
 #ifndef TRIMODEL_H
 #define TRIMODEL_H
 
+#include <cmath>
 
 class TriModel
 {
@@ -27,7 +28,7 @@ class TriModel
         // Constructor to initialise data members
         TriModel(double S0_, double sigma_,double r_): S0(S0_), sigma(sigma_),r(r_)
         {
-            nu = r-sigma*sigma/2;
+            nu = r-pow(sigma,2)/2;
 
             dt = 0.0;
             dx = 0.0;

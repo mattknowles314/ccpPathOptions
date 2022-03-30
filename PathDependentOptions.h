@@ -20,9 +20,6 @@ class PathDependentOptions
         double PriceByExpectation (TriPath Model);
 };
 
-// Write your subclasses below this line.
-
-
 //Asian Option Subclass
 class AsianOpt : public PathDependentOptions
 {
@@ -31,8 +28,6 @@ class AsianOpt : public PathDependentOptions
     public:
         AsianOpt(double K_) : K(K_) {};
         double Payoff(double *prices, int N);
-
-
 };
 
 //Loockback Option Subclass

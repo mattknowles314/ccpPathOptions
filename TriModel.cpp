@@ -13,12 +13,12 @@ void TriModel::Set_dtdx(double T, int N)
 
 double TriModel::RiskNeutProb_up()
 {
-    return ((sigma*sigma*dt + nu*nu*dt*dt)/dx/dx + nu*dt/dx)/2;
+    return 0.5*((sigma*sigma*dt + nu*nu*dt*dt)/dx/dx + nu*dt/dx);
 }
 
 double TriModel::RiskNeutProb_down()
 {
-    return ((sigma*sigma*dt + nu*nu*dt*dt)/dx/dx - nu*dt/dx)/2;
+    return 0.5*((sigma*sigma*dt + nu*nu*dt*dt)/dx/dx - nu*dt/dx);
 }
 
 double TriModel::S(int i)

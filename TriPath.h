@@ -17,10 +17,18 @@ class TriPath : public TriModel
         double S0;
         double sigma;
         double r;
+        double dx;
+        double dt;
     public:
         //Constructor
-        TriPath(double S0_, double sigma_, double r_, double T_, int N_) : TriModel(S0,sigma,r) {}
+        TriPath(double S0_, double sigma_, double r_, double T_, int N_) : N(N_), T(T_), TriModel(S0_,sigma_,r_) {
+            Set_dtdx(T_,N_);
+        }
 
+        int GetN(){ return N;}
+
+        int GetT(){ return T;}
+        
         //Return a path given an index
         void PathByNumber(int x, int *path);
 
@@ -29,14 +37,6 @@ class TriPath : public TriModel
 
         //Calculate probability path is selected
         double ProbabilityByPath(int *path);
-
-        //For a level n of the tree, this returns the node of a path
-        int getNode(int x, int n);
-
-        //Fo
-        int getPos(int x, int node);
-
-        void AllPaths();
 };
 
 

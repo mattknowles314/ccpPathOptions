@@ -13,70 +13,49 @@ using namespace std;
 void TriPath::PathByNumber(int x, int *path){
     if(x < 0 || x > pow(3,N)-1){
         cout << "Error - x out of range" << endl;
-    } 
-}
-
-void TriPath::PricesByPath(int *path, double *prices){
-    int e = 2;
-}
-
-double TriPath::ProbabilityByPath(int *path){
-    double prob;
-    return prob;
-}
-
-int TriPath::getNode(int x, int n){
-    if(n <0){ return 99; } //Failure case
-    //Base case
-    if(n==0){
-        if(x==0){
-            return 1;
-        }else if (x==1)
-        {
-            return 2;
-        } else{
-            return 3;
-        }
-    }else{
-        //Edge cases
-        if(x == 0){
-            return 1;
-        }else if (x == pow(3,n)-1)
-        {
-            return (2*n)+1;
-        }else if (x==1 || x==2)
-        {
-            return 2;
-        }else if (x==pow(3,n)-2 || x==pow(3,n)-3)
-        {
-            return 2*n;
-        }
-        //General case 
-        else{
-            /*  From this point on, each node has three incoming paths. 
-                So by taking the floor of x/3, we know how many nodes down the tree we need to go 
-                before arriving at the node which x is on.
-                i.e if x=5. the floor(5/3)=1, so we stay on node 3, which is 2+1
-                Conversely, if x=8, floor(8/3)=2, so we go to node 2+2=4. The reason for the 
-                2+f is because the first two nodes are covered in the base case.
-            */
-            int f = floor(x/3);
-            return 2 + f;
+    } else{
+        for(int i=0;x>0;i++){
+            path[i] = x%3;
+            x/=3;
         }
     }
 }
 
-int TriPath::getPos(int x, int node){
- 
+//Todo: use TriModel::S() function
+void TriPath::PricesByPath(int *path, double *prices){
+    prices[0] = S0;
+    for (int i = 1; i < N; i++)
+    {
+        if(path[i-1]==0){
+            prices[i] = prices[i-1]*exp((-1*dx));
+        } else if (path[i-1]==1){
+            prices[i] = prices[i-1];
+        } else{
+            prices[i] = prices[i-1]*exp(dx);
+        }
+    } 
 }
 
-void TriPath::AllPaths(){
-    /*
-    We use Heap's Algorithm for generating all permutations of the 
-    */
-
-    int moves[3] = {2,1,0};
-    const int NumPaths = pow(3,N);
-    int paths[NumPaths][N];
-
+double TriPath::ProbabilityByPath(int *path){
+    double qu = RiskNeutProb_up();
+    double qd = RiskNeutProb_down();
+    double qm = 1-qu-qd; //Bug: this little bugger is negative
+    double ups=0; 
+    double downs=0;
+    double mids=0;
+    for (int i = 0; i < N; i++)
+    {
+        if(path[i]==0){
+            downs+=1;
+        } else if (path[i]==1)
+        {
+            mids+=1;
+        } else if (path[i]==2)
+        {
+            ups+=1;
+        }
+    }
+    double prob = pow(qu,ups)*pow(qd,downs)*pow(qm,mids);
+    //cout << prob << endl;
+    return prob;
 }
