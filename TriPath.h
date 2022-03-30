@@ -25,8 +25,9 @@ class TriPath : public TriModel
             Set_dtdx(T_,N_);
         }
 
-        int GetN(){ return N;}
 
+        //Helpful functions for retreiving values of T and N
+        int GetN(){ return N;}
         int GetT(){ return T;}
         
         //Return a path given an index

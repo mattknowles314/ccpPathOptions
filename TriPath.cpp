@@ -5,12 +5,15 @@
 
 using namespace std;
 
-/*x = 0 is the topmost path, while x=3^N -1 is the bottommost 
- 2 = up
- 1 = same
- 0 = down
+/*
+We use the modulo operator to generate paths for a given input x.
+Note the convention used:
+ 2 = path goes up
+ 1 = path doesn't change
+ 0 = path goes down
 */
 void TriPath::PathByNumber(int x, int *path){
+    //First check x is a legal value
     if(x < 0 || x > pow(3,N)-1){
         cout << "Error - x out of range" << endl;
     } else{
@@ -21,7 +24,8 @@ void TriPath::PathByNumber(int x, int *path){
     }
 }
 
-//Todo: use TriModel::S() function
+
+//Loops through the path to calculate next price based on the path
 void TriPath::PricesByPath(int *path, double *prices){
     prices[0] = S0;
     for (int i = 1; i < N; i++)
@@ -30,16 +34,17 @@ void TriPath::PricesByPath(int *path, double *prices){
             prices[i] = prices[i-1]*exp((-1*dx));
         } else if (path[i-1]==1){
             prices[i] = prices[i-1];
-        } else{
+        } else if (path[i-1]==2){
             prices[i] = prices[i-1]*exp(dx);
         }
     } 
 }
 
+//Calculate probability along a path by multiplying powers of each jump together.
 double TriPath::ProbabilityByPath(int *path){
     double qu = RiskNeutProb_up();
     double qd = RiskNeutProb_down();
-    double qm = 1-qu-qd; //Bug: this little bugger is negative
+    double qm = 1-qu-qd; 
     double ups=0; 
     double downs=0;
     double mids=0;

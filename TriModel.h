@@ -44,9 +44,6 @@ class TriModel
         // calculate the risk neutual probability of going down
         double RiskNeutProb_down();
 
-        // calculate the stock price at time step n and node i
-        double S(int i);
-
         // return the risk free interest rate R
         double Get_r() { return r;}
 

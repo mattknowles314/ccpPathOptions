@@ -20,8 +20,3 @@ double TriModel::RiskNeutProb_down()
 {
     return 0.5*((sigma*sigma*dt + nu*nu*dt*dt)/dx/dx - nu*dt/dx);
 }
-
-double TriModel::S(int i)
-{
-    return S0*exp(i*dx);
-}
